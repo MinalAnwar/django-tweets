@@ -1,26 +1,27 @@
 {% extends 'layout.html' %}
 
-
 {% block title %}
     tweet
 {% endblock title %}
 
-
 {% block content %}
     <h2>
-        {%if form.instance.pk%}
-        Edit Tweet
-        {%else%}
-        Create Tweet            
+        {% if form.instance.pk %}
+            Edit Tweet
+        {% else %}
+            Create Tweet            
         {% endif %}
-            
     </h2>
-    <form method = "POST" enctype = "multipart/form-data" class="form">
-        {% csrf_token%}
-        {{form.as_p}}
-        <button class="btn btn-warning" type = "submit">Submit</button>
+    <form method="POST" enctype="multipart/form-data" class="form">
+        {% csrf_token %}
+        {{ form.as_p }}
+        
+        {% if form.errors %}
+            <div class="alert alert-danger mt-3">
+                <strong>Error!</strong> Please correct the errors below.
+            </div>
+        {% endif %}
+        <button type="submit" class="btn btn-warning">Submit</button>
     </form>
     <a href="{% url 'tweet:tweet_list' %}" class="btn btn-secondary mt-3">Back to Home</a>
-
 {% endblock content %}
-    
