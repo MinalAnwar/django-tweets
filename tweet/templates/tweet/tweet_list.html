@@ -6,7 +6,7 @@
 
 {% block content %}
     <h1 class="text-center text-white mt-4">Welcome to Tweets App</h1>
-    <a class="btn btn-primary mt-4" hrefv= "{% url 'tweet:tweet_create' %}">Create Tweet</a>
+    <a class="btn btn-primary mt-4" href= "{% url 'tweet:tweet_create' %}">Create Tweet</a>
     <div class="container row gap-3 mt-3">
         {% for tweet in tweets %}
             <div class="card" style="width: 18rem; margin: 10px;">
