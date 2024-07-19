@@ -6,17 +6,23 @@
 
 {% block content %}
     <h1 class="text-center text-white mt-4">Welcome to Tweets App</h1>
-    <a class="btn btn-primary mt-4" href= "{% url 'tweet:tweet_create' %}">Create Tweet</a>
+    <a class="btn btn-light m-2 mt-4" href= "{% url 'tweet:tweet_create' %}">Create Tweet</a>
     <div class="container row gap-3 mt-3">
         {% for tweet in tweets %}
-            <div class="card" style="width: 18rem; margin: 10px;">
+            <div class="card" style="width: 18rem; margin: 7px;">
                 <img src="{{ tweet.photo.url }}" class="card-img-top mt-3" alt="Profile photo">
                 <div class="card-body">
                     <h5 class="card-title">{{ tweet.user.username }}</h5>
                     <p class="card-text">{{ tweet.text }}</p>
                     {% if tweet.user == user %}
-                        <a href="{% url 'tweet:tweet_edit' tweet.id %}" class="btn btn-primary">Edit</a>
-                        <a href="{% url 'tweet:tweet_delete' tweet.id %}" class="btn btn-danger">Delete</a>
+                        <a href="{% url 'tweet:tweet_edit' tweet.id %}" class="btn btn-light">
+                            <span style="margin-right:5px">Edit</span>
+                            <span class="fa fa-edit"></span>
+                        </a>          
+                        <a href="{% url 'tweet:tweet_delete' tweet.id %}" class="btn btn-danger">
+                            <span>Delete</span>
+                            <span class="fa fa-trash fa-x"></span>
+                        </a>
                     {% endif %}
                 </div>
             </div>
