@@ -66,3 +66,7 @@ def user_register(request):
         form = UserRegisterationForm()
     return render(request, 'registration/register.html', {'form' : form})
 
+def searching(request):
+    query = request.GET.get('query')
+    result = Tweet.objects.filter(Q(user__username__icontains = query) | Q(text__icontains = query))
+    return render(request, 'tweet/tweet_list.html',{'tweets':result})    
