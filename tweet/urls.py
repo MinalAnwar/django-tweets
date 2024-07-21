@@ -10,4 +10,5 @@ urlpatterns = [
     path('<int:tweet_id>/delete/', views.tweet_delete, name = 'tweet_delete'),
     path('register/', views.user_register, name = 'register'),
     path('search/', views.searching, name = 'search'),
+    path('<int:tweet_id>/detail/', views.tweet_detail, name = 'tweet_detail')
 ] 

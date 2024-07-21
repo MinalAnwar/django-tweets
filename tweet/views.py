@@ -7,7 +7,7 @@ from django.contrib.auth import login
 from django.db.models import Q
 
 def tweet_list(request):
-    tweets = Tweet.objects.all().order_by("created_at")
+    tweets = Tweet.objects.all().order_by("created_at")[:20]
     return render(request, 'tweet/tweet_list.html', {'tweets': tweets})
 
 
@@ -70,3 +70,7 @@ def searching(request):
     query = request.GET.get('query')
     result = Tweet.objects.filter(Q(user__username__icontains = query) | Q(text__icontains = query))
     return render(request, 'tweet/tweet_list.html',{'tweets':result})    
+
+def tweet_detail(request, tweet_id):
+    tweet = get_object_or_404(Tweet, pk = tweet_id)
+    return render(request, 'tweet/tweet_detail.html', {'tweet':tweet})
