@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    Tweet
+{% endblock title %}
+
+{% block content %}
+    <style>
+        .animated-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .animated-card:hover {
+            transform: translateY(-20px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+    
+    <h1 class="text-center text-white mt-4">Welcome to Tweets App</h1>
+    <a class="btn btn-light m-4 mt-4" href="{% url 'tweet:tweet_create' %}">Create Tweet</a>
+    <div class="container d-flex flex-wrap mt-3">
+        {% for tweet in tweets %}
+            <a href="{% url 'tweet:tweet_detail' tweet.id %}" style="text-decoration: none; color: inherit;">
+                <div class="card animated-card" style="width: 18rem; height: 350px; margin: 15px;">
+                    <img src="{{ tweet.photo.url }}" class="card-img-top" style="height: 200px; object-fit: cover;" alt="Profile photo">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">{{ tweet.user.username }}</h5>
+                        <p class="card-text" style="flex-grow: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ tweet.text|slice:":60" }}
+                            {% if tweet.text|length > 60 %}...{% endif %}
+                        </p>
+                        {% if tweet.user == user %}
+                            <div class="mt-4">
+                                <a href="{% url 'tweet:tweet_edit' tweet.id %}" class="btn btn-light btn-sm">
+                                    <span style="margin-right:5px">Edit</span>
+                                    <span class="fa fa-edit"></span>
+                                </a>          
+                                <a href="{% url 'tweet:tweet_delete' tweet.id %}" class="btn btn-danger btn-sm">
+                                    <span>Delete</span>
+                                    <span class="fa fa-trash"></span>
+                                </a>
+                            </div>
+                        {% endif %}
+                    </div>
+                </div>
+            </a>
+        {% endfor %}
+    </div>
+{% endblock content %}

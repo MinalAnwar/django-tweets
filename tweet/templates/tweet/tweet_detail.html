@@ -1,0 +1,29 @@
+{% extends 'layout.html' %}
+
+{% block title %}
+    tweet
+{% endblock title %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card p-3 shadow-sm" style="border: 1px solid #ddd; border-radius: 8px; overflow: hidden;">
+                    <div class="row no-gutters">
+                        <div class="col-md-5">
+                            <div class="card-body">
+                                <h4 class="card-title">
+                                    <span class="fa fa-user-circle" style="margin-right: 10px;"></span>{{ tweet.user.username }}
+                                </h4>
+                                <p class="card-text">{{ tweet.text }}</p>
+                            </div>
+                        </div>
+                        <div class="col-md-7 d-flex justify-content-center align-items-center">
+                            <img src="{{ tweet.photo.url }}" class="img-fluid" alt="Profile photo" style="border-radius: 8px;">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}
